@@ -6,9 +6,25 @@ function App() {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
+    fetch("http://localhost:8001/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({key: "value" })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok"); 
+      } 
+      return response.json(); 
+    }) 
+    .then((data) => {
+      setData(data.message);
+    }) 
+    .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   return (
