@@ -5,6 +5,7 @@ import "./App.css";
 function App() {
   const [data, setData] = React.useState(null);
   const [variable, setVariable] = React.useState("Butona tıklanmadııı");
+  const [image, setImage] = React.useState("images/on_full1.jpg")
   
   const handleButtonClick = () => {
     var mesaj = "Hello Clickledin Bebek";
@@ -17,7 +18,7 @@ function App() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({key: "value" })
+      body: JSON.stringify({url: "value" })
     })
     .then((response) => {
       if (!response.ok) {
@@ -38,6 +39,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <img src={image} alt="Your Image"/>
         <button onClick={handleButtonClick}> Send POST Request </button>
         <p>{!data ? "Loading..." : data}</p>
         <p>{!variable ? "Butona Basılmadı": variable}</p>
